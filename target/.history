@@ -1,11 +1,6 @@
 stage
-activator ui
-ui
 compile
-run
-h2-browser
 eclipse
 compile
 stage
-clean
 run

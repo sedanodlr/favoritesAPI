@@ -1,6 +1,6 @@
-// @SOURCE:C:/Users/Jose/workspace/favo/conf/routes
+// @SOURCE:C:/Users/Jose/workspace/favorites/conf/routes
 // @HASH:1472067cb03e4d6c1985812e46ebaea5635044ec
-// @DATE:Sun Nov 30 20:36:01 CET 2014
+// @DATE:Sun Nov 30 22:27:28 CET 2014
 
 
 import play.core._
