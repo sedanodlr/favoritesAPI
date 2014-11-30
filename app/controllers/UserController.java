@@ -26,7 +26,7 @@ public class UserController extends Controller {
 	// CREAR USUARIO
 	public static Result createUser()	{
 		JsonNode Json = request().body().asJson();
-		User user = null;
+		User user = new User();
 		user.name = Json.get("name").asText();
 		user.lastname = Json.get("lastname").asText();
 		user.email = Json.get("email").asText();
