@@ -4,3 +4,12 @@ eclipse
 compile
 stage
 run
+compile
+run
+stage
+compile
+run
+h2-browser
+dir
+run
+h2-browser

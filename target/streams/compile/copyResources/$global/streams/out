@@ -1,3 +1,8 @@
 [0m[[0mdebug[0m] [0mCopy resource mappings: [0m
 [0m[[0mdebug[0m] [0m	(C:\Users\Jose\workspace\favorites\conf\application.conf,C:\Users\Jose\workspace\favorites\target\scala-2.11\classes\application.conf)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Jose\workspace\favorites\conf\evolutions,C:\Users\Jose\workspace\favorites\target\scala-2.11\classes\evolutions)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Jose\workspace\favorites\conf\messages,C:\Users\Jose\workspace\favorites\target\scala-2.11\classes\messages)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Jose\workspace\favorites\conf\messages.es,C:\Users\Jose\workspace\favorites\target\scala-2.11\classes\messages.es)[0m
 [0m[[0mdebug[0m] [0m	(C:\Users\Jose\workspace\favorites\conf\routes,C:\Users\Jose\workspace\favorites\target\scala-2.11\classes\routes)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Jose\workspace\favorites\conf\evolutions\default,C:\Users\Jose\workspace\favorites\target\scala-2.11\classes\evolutions\default)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Jose\workspace\favorites\conf\evolutions\default\1.sql,C:\Users\Jose\workspace\favorites\target\scala-2.11\classes\evolutions\default\1.sql)[0m
