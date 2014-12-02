@@ -1,26 +1,39 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
 public class Favorito extends Model {
-	
+
 	@Id
-	private Long id;
+	public Long id;
 	
 	@Required
-	private String name;
+	public String name;
 	
 	@Required
-	private String url;
+	public String url;
 	
 	@ManyToOne
-	private Usuario usuario;
+	@JsonIgnore
+	public Usuario usuario;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JsonIgnore
+	public List<Tag> tags = new ArrayList<Tag>();
 	
 	public static Finder<Long, Favorito> finder = new Finder<Long, Favorito>(Long.class,Favorito.class);
 	
@@ -48,8 +61,55 @@ public class Favorito extends Model {
 		this.url = url;
 	}
 
+	public Usuario getUsuario()	{
+		return usuario;
+	}
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	
+	public List<Tag> getTags() {
+		return tags;
+	}
+	
+	public void setTags(List<Tag> tags)	{
+		this.tags = tags;
+	}
+	
+	public static List<Favorito> findAll(int size,int offset)	{
+		return finder.setMaxRows(size).setFirstRow(offset).findList();
+	}
+	
+	public static List<Favorito> findById(Long id,int size, int offset)	{
+		return finder.where().eq("id",id).setMaxRows(size).setFirstRow(offset).findList();
+	}
+	
+	public static List<Favorito> findByName(String name,int size, int offset)	{
+		return finder.where().eq("name",name).setMaxRows(size).setFirstRow(offset).findList();
+	}
+	
+	public static List<Favorito> findByUrl(String url,int size, int offset)	{
+		return finder.where().eq("url",url).setMaxRows(size).setFirstRow(offset).findList();
+	}
+	
+	public static List<Favorito> findByUser(Usuario usuario,int size, int offset)	{
+		return finder.where().eq("usuario", usuario).setMaxRows(size).setFirstRow(offset).findList();
+	}
+	/*
+	@Override
+	//Nos ayuda a saber si dos objetos son iguales 
+	public boolean equals(Object obj)	{
+		if(obj == this)	{
+			return true;
+		}
+		if(!(obj instanceof Usuario))	{
+			return false;
+		}
+		
+		Usuario u = (Usuario)obj;
+		
+		return (u.id == this.id);
+	}*/
+	
 }
 

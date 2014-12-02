@@ -44,4 +44,17 @@ public class Favoritos extends Controller {
 		
 		return created();
 	}
+	
+	public static Result delete(Long userId)	{
+		Favorito favorito = Favorito.finder.byId(userId);
+		if(favorito == null)	{
+			return notFound();
+		}
+		if(!favorito.getUsuario().getId().equals(userId))	{
+			return badRequest(ControllerHelper.errorJson(2, "invalid_user", null));
+		}
+		favorito.delete();
+		
+		return ok();
+	}
 }

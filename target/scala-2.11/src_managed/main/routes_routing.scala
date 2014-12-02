@@ -1,6 +1,6 @@
 // @SOURCE:C:/Users/Jose/workspace/favorites/conf/routes
-// @HASH:69fa375be046bd79df5daff4a6e1bf5b266d86f2
-// @DATE:Mon Dec 01 10:46:14 CET 2014
+// @HASH:d42535612242424105208c8cc790f64deef71980
+// @DATE:Tue Dec 02 11:27:28 CET 2014
 
 
 import play.core._
@@ -89,12 +89,40 @@ HandlerDef(this.getClass.getClassLoader, "", "controllers.Telefonos", "delete", 
         
 
 // @LINE:11
-private[this] lazy val controllers_Assets_at8_route = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("assets/"),DynamicPart("file", """.+""",false))))
-private[this] lazy val controllers_Assets_at8_invoker = createInvoker(
+private[this] lazy val controllers_Favoritos_index8_route = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("usuario/"),DynamicPart("uId", """[0-9]*""",false),StaticPart("/favoritos"))))
+private[this] lazy val controllers_Favoritos_index8_invoker = createInvoker(
+controllers.Favoritos.index(fakeValue[Long]),
+HandlerDef(this.getClass.getClassLoader, "", "controllers.Favoritos", "index", Seq(classOf[Long]),"GET", """""", Routes.prefix + """usuario/$uId<[0-9]*>/favoritos"""))
+        
+
+// @LINE:12
+private[this] lazy val controllers_Favoritos_create9_route = Route("POST", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("usuario/"),DynamicPart("uId", """[0-9]*""",false),StaticPart("/favorito"))))
+private[this] lazy val controllers_Favoritos_create9_invoker = createInvoker(
+controllers.Favoritos.create(fakeValue[Long]),
+HandlerDef(this.getClass.getClassLoader, "", "controllers.Favoritos", "create", Seq(classOf[Long]),"POST", """""", Routes.prefix + """usuario/$uId<[0-9]*>/favorito"""))
+        
+
+// @LINE:14
+private[this] lazy val controllers_Tags_index10_route = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("usuario/"),DynamicPart("uId", """[0-9]*""",false),StaticPart("/tags"))))
+private[this] lazy val controllers_Tags_index10_invoker = createInvoker(
+controllers.Tags.index(fakeValue[Long]),
+HandlerDef(this.getClass.getClassLoader, "", "controllers.Tags", "index", Seq(classOf[Long]),"GET", """""", Routes.prefix + """usuario/$uId<[0-9]*>/tags"""))
+        
+
+// @LINE:15
+private[this] lazy val controllers_Tags_create11_route = Route("POST", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("usuario/"),DynamicPart("uId", """[0-9]*""",false),StaticPart("/tag"))))
+private[this] lazy val controllers_Tags_create11_invoker = createInvoker(
+controllers.Tags.create(fakeValue[Long]),
+HandlerDef(this.getClass.getClassLoader, "", "controllers.Tags", "create", Seq(classOf[Long]),"POST", """""", Routes.prefix + """usuario/$uId<[0-9]*>/tag"""))
+        
+
+// @LINE:18
+private[this] lazy val controllers_Assets_at12_route = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("assets/"),DynamicPart("file", """.+""",false))))
+private[this] lazy val controllers_Assets_at12_invoker = createInvoker(
 controllers.Assets.at(fakeValue[String], fakeValue[String]),
 HandlerDef(this.getClass.getClassLoader, "", "controllers.Assets", "at", Seq(classOf[String], classOf[String]),"GET", """ Map static resources from the /public folder to the /assets URL path""", Routes.prefix + """assets/$file<.+>"""))
         
-def documentation = List(("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuarios/$pag<[0-9]*>""","""controllers.Usuarios.index(pag:Integer)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuario/$uId<[0-9]*>""","""controllers.Usuarios.retrieve(uId:Long)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuario""","""controllers.Usuarios.create()"""),("""PUT""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuario/$uId<[0-9]*>""","""controllers.Usuarios.update(uId:Long)"""),("""DELETE""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuario/$uId<[0-9]*>""","""controllers.Usuarios.delete(uId:Long)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuario/$uId<[0-9]*>/telefonos""","""controllers.Telefonos.index(uId:Long)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuario/$uId<[0-9]*>/telefono""","""controllers.Telefonos.create(uId:Long)"""),("""DELETE""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuario/$uId<[0-9]*>/telefono/$tId<[0-9]*>""","""controllers.Telefonos.delete(uId:Long, tId:Long)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)""")).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
+def documentation = List(("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuarios/$pag<[0-9]*>""","""controllers.Usuarios.index(pag:Integer)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuario/$uId<[0-9]*>""","""controllers.Usuarios.retrieve(uId:Long)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuario""","""controllers.Usuarios.create()"""),("""PUT""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuario/$uId<[0-9]*>""","""controllers.Usuarios.update(uId:Long)"""),("""DELETE""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuario/$uId<[0-9]*>""","""controllers.Usuarios.delete(uId:Long)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuario/$uId<[0-9]*>/telefonos""","""controllers.Telefonos.index(uId:Long)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuario/$uId<[0-9]*>/telefono""","""controllers.Telefonos.create(uId:Long)"""),("""DELETE""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuario/$uId<[0-9]*>/telefono/$tId<[0-9]*>""","""controllers.Telefonos.delete(uId:Long, tId:Long)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuario/$uId<[0-9]*>/favoritos""","""controllers.Favoritos.index(uId:Long)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuario/$uId<[0-9]*>/favorito""","""controllers.Favoritos.create(uId:Long)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuario/$uId<[0-9]*>/tags""","""controllers.Tags.index(uId:Long)"""),("""POST""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuario/$uId<[0-9]*>/tag""","""controllers.Tags.create(uId:Long)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)""")).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
   case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
   case l => s ++ l.asInstanceOf[List[(String,String,String)]]
 }}
@@ -167,9 +195,41 @@ case controllers_Telefonos_delete7_route(params) => {
         
 
 // @LINE:11
-case controllers_Assets_at8_route(params) => {
+case controllers_Favoritos_index8_route(params) => {
+   call(params.fromPath[Long]("uId", None)) { (uId) =>
+        controllers_Favoritos_index8_invoker.call(controllers.Favoritos.index(uId))
+   }
+}
+        
+
+// @LINE:12
+case controllers_Favoritos_create9_route(params) => {
+   call(params.fromPath[Long]("uId", None)) { (uId) =>
+        controllers_Favoritos_create9_invoker.call(controllers.Favoritos.create(uId))
+   }
+}
+        
+
+// @LINE:14
+case controllers_Tags_index10_route(params) => {
+   call(params.fromPath[Long]("uId", None)) { (uId) =>
+        controllers_Tags_index10_invoker.call(controllers.Tags.index(uId))
+   }
+}
+        
+
+// @LINE:15
+case controllers_Tags_create11_route(params) => {
+   call(params.fromPath[Long]("uId", None)) { (uId) =>
+        controllers_Tags_create11_invoker.call(controllers.Tags.create(uId))
+   }
+}
+        
+
+// @LINE:18
+case controllers_Assets_at12_route(params) => {
    call(Param[String]("path", Right("/public")), params.fromPath[String]("file", None)) { (path, file) =>
-        controllers_Assets_at8_invoker.call(controllers.Assets.at(path, file))
+        controllers_Assets_at12_invoker.call(controllers.Assets.at(path, file))
    }
 }
         

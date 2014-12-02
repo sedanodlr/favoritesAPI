@@ -14,20 +14,21 @@ import play.db.ebean.Model;
 @Entity
 public class Usuario extends Model {
 	
-	@Id
-	private Long id;
+	@Id 
+    Long id;
 	
 	@Required
-	private String nombre;
+	public String nombre;
 	
 	@Required
-	private String apellidos;
+	public String apellidos;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="usuario")
-	private List<Favorito> favoritos = new ArrayList<Favorito>();
+	public List<Favorito> favoritos = new ArrayList<Favorito>();
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="usuario")
-	private List<Telefono> telefonos = new ArrayList<Telefono>();	
+	public List<Telefono> telefonos = new ArrayList<Telefono>();	
+	
 	
 	public static Finder<Long, Usuario> finder = new Finder<Long, Usuario>(Long.class, Usuario.class);
 	
