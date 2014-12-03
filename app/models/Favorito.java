@@ -31,12 +31,40 @@ public class Favorito extends Model {
 	@JsonIgnore
 	public Usuario usuario;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="favorito")
 	public List<Tag> tags = new ArrayList<Tag>();
 	
 	public static Finder<Long, Favorito> finder = new Finder<Long, Favorito>(Long.class,Favorito.class);
 	
+	/*
+	 *  User Functions
+	 */
+	public Usuario getUsuario()	{
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
+	/*
+	 *  Tag Functions
+	 */
+	public void addTag(Tag tag) {
+		tags.add(tag);
+		tag.setFavorito(this);
+	}
+	
+	public List<Tag> getTags()	{
+		return tags;
+	}
+	
+	public void setTags(List<Tag> tags)	{
+		this.tags = tags;
+	}
+	
+	/*
+	 *  Id Functions
+	 */
 	public Long getId()	{
 		return id;
 	}
@@ -45,6 +73,9 @@ public class Favorito extends Model {
 		this.id = id;
 	}
 	
+	/*
+	 *  Name Functions
+	 */
 	public String getName()	{
 		return name;
 	}
@@ -53,6 +84,9 @@ public class Favorito extends Model {
 		this.name = name;
 	}
 	
+	/*
+	 * URL functions 
+	 */
 	public String getUrl()	{
 		return url;
 	}
@@ -60,22 +94,10 @@ public class Favorito extends Model {
 	public void setUrl(String url)	{
 		this.url = url;
 	}
-
-	public Usuario getUsuario()	{
-		return usuario;
-	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-	
-	public List<Tag> getTags() {
-		return tags;
-	}
-	
-	public void setTags(List<Tag> tags)	{
-		this.tags = tags;
-	}
-	
+    
+	/*
+	 *  Favorite functions
+	 */
 	public static List<Favorito> findAll(int size,int offset)	{
 		return finder.setMaxRows(size).setFirstRow(offset).findList();
 	}
@@ -110,6 +132,5 @@ public class Favorito extends Model {
 		
 		return (u.id == this.id);
 	}*/
-	
 }
 

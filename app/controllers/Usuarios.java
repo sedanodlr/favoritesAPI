@@ -54,6 +54,7 @@ public class Usuarios extends Controller {
 		return res; 
 	}
 	
+	
 	/**
 	 * Action method para GET /usuario/<uId>
 	 * 

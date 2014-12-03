@@ -31,21 +31,21 @@ public class Tags extends Controller {
 	
 	public static Result create(Long favoritoId)	{
 		Form<Tag> form = Form.form(Tag.class).bindFromRequest();
-		String offset = request().getQueryString("offset");
-		String size = request().getQueryString("size");
+		//String offset = request().getQueryString("offset");
+		//String size = request().getQueryString("size");
 		
 		if(form.hasErrors())	{
 			return badRequest(ControllerHelper.errorJson(2, "invalid_tag", form.errorsAsJson()));
 		}
 		
-		List<Favorito> favoritos = Favorito.findAll(Integer.valueOf(offset), Integer.valueOf(size));
-		if(favoritos == null)	{
+		Favorito favorito = Favorito.finder.byId(favoritoId);
+		if(favorito == null)	{
 			return notFound();
 		}
 		
 		Tag tagName = form.get();
 		
-		tagName.setFavoritos(favoritos);
+		tagName.setFavorito(favorito);
 		tagName.save();
 		
 		return created();

@@ -1,6 +1,6 @@
 // @SOURCE:C:/Users/Jose/workspace/favorites/conf/routes
 // @HASH:d42535612242424105208c8cc790f64deef71980
-// @DATE:Tue Dec 02 11:27:28 CET 2014
+// @DATE:Wed Dec 03 12:41:28 CET 2014
 
 import Routes.{prefix => _prefix, defaultPrefix => _defaultPrefix}
 import play.core._

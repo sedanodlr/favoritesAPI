@@ -23,12 +23,26 @@ public class Tag extends Model {
 	@Required
 	public String tagName;
 	
-	@ManyToMany(mappedBy = "tags")
+	@ManyToOne
 	@JsonIgnore
-	public List<Favorito> favoritos;
+	public Favorito favorito;
 	
 	public static Finder<Long, Tag> finder = new Finder<Long, Tag>(Long.class, Tag.class);
 	
+	/*
+	 *  Favorite functions
+	 */
+	public Favorito getFavorito()	{
+		return favorito;
+	}
+	
+	public void setFavorito(Favorito favorito)	{
+		this.favorito = favorito;
+	}
+	
+	/*
+	 *  Id functions
+	 */
 	public Long getId()	{
 		return id;
 	}
@@ -37,19 +51,14 @@ public class Tag extends Model {
 		this.id = id;
 	}
 	
+	/*
+	 *  TagName functions
+	 */
 	public String getTagName()	{
 		return tagName;
 	}
 	
 	public void setTagName(String tagName)	{
 		this.tagName = tagName;
-	}
-	
-	public List<Favorito> getFavoritos()	{
-		return favoritos;
-	}
-	
-	public void setFavoritos(List<Favorito> favoritos)	{
-		this.favoritos = favoritos;
 	}
 }

@@ -14,6 +14,7 @@ create table favorito (
 create table tag (
   id                        bigint not null,
   tag_name                  varchar(255),
+  favorito_id               bigint,
   constraint pk_tag primary key (id))
 ;
 
@@ -32,12 +33,6 @@ create table usuario (
   constraint pk_usuario primary key (id))
 ;
 
-
-create table favorito_tag (
-  favorito_id                    bigint not null,
-  tag_id                         bigint not null,
-  constraint pk_favorito_tag primary key (favorito_id, tag_id))
-;
 create sequence favorito_seq;
 
 create sequence tag_seq;
@@ -48,22 +43,18 @@ create sequence usuario_seq;
 
 alter table favorito add constraint fk_favorito_usuario_1 foreign key (usuario_id) references usuario (id) on delete restrict on update restrict;
 create index ix_favorito_usuario_1 on favorito (usuario_id);
-alter table telefono add constraint fk_telefono_usuario_2 foreign key (usuario_id) references usuario (id) on delete restrict on update restrict;
-create index ix_telefono_usuario_2 on telefono (usuario_id);
+alter table tag add constraint fk_tag_favorito_2 foreign key (favorito_id) references favorito (id) on delete restrict on update restrict;
+create index ix_tag_favorito_2 on tag (favorito_id);
+alter table telefono add constraint fk_telefono_usuario_3 foreign key (usuario_id) references usuario (id) on delete restrict on update restrict;
+create index ix_telefono_usuario_3 on telefono (usuario_id);
 
 
-
-alter table favorito_tag add constraint fk_favorito_tag_favorito_01 foreign key (favorito_id) references favorito (id) on delete restrict on update restrict;
-
-alter table favorito_tag add constraint fk_favorito_tag_tag_02 foreign key (tag_id) references tag (id) on delete restrict on update restrict;
 
 # --- !Downs
 
 SET REFERENTIAL_INTEGRITY FALSE;
 
 drop table if exists favorito;
-
-drop table if exists favorito_tag;
 
 drop table if exists tag;
 

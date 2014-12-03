@@ -22,13 +22,25 @@ public class Telefono extends Model {
 	private Boolean movil;
 	
 	@ManyToOne
-	@JsonIgnore
 	private Usuario usuario;
 	
 	
 	public static Finder<Long, Telefono> finder = new Finder<Long, Telefono>(Long.class, Telefono.class);
 	
+	/*
+	 *  User functions
+	 */
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	
+	/*
+	 *  Id functions
+	 */
 	public Long getId() {
 		return id;
 	}
@@ -37,6 +49,9 @@ public class Telefono extends Model {
 		this.id = id;
 	}
 
+	/*
+	 *  Number functions
+	 */
 	public String getNumero() {
 		return numero;
 	}
@@ -44,7 +59,9 @@ public class Telefono extends Model {
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-
+	/*
+	 *  Movil functions
+	 */
 	public Boolean getMovil() {
 		return movil;
 	}
@@ -52,13 +69,4 @@ public class Telefono extends Model {
 	public void setMovil(Boolean movil) {
 		this.movil = movil;
 	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
 }
