@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -23,21 +24,21 @@ public class Tag extends Model {
 	@Required
 	public String tagName;
 	
-	@ManyToOne
+	@ManyToMany(mappedBy= "tags")
 	@JsonIgnore
-	public Favorito favorito;
+	public List<Favorito> favoritos;
 	
 	public static Finder<Long, Tag> finder = new Finder<Long, Tag>(Long.class, Tag.class);
 	
 	/*
 	 *  Favorite functions
 	 */
-	public Favorito getFavorito()	{
-		return favorito;
+	public List<Favorito> getFavoritos()	{
+		return favoritos;
 	}
 	
-	public void setFavorito(Favorito favorito)	{
-		this.favorito = favorito;
+	public void addFavorito(Favorito favorito)	{
+		favoritos.add(favorito);
 	}
 	
 	/*

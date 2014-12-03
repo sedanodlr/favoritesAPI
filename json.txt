@@ -1,0 +1,17 @@
+{
+"nombre":"nombre","apellidos":"apellidos",
+"favoritos":[
+                {"name":"20minutos","url":"www.20minutos.es",
+                 "tags":[
+                            {"tagName":"noticias"},
+                            {"tagName":"españa"}
+                           ]
+                }
+                {"name":"manolo","url":"www.manolo.es",
+                 "tags":[
+                            {"tagName":"noticias"},
+                            {"tagName":"manolo"}
+                           ]
+                }
+               ]      
+}

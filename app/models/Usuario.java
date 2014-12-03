@@ -32,8 +32,15 @@ public class Usuario extends Model {
 	
 	public static Finder<Long, Usuario> finder = new Finder<Long, Usuario>(Long.class, Usuario.class);
 	
+	/*
+	 *  Usuario functions
+	 */
 	public static List<Usuario> findPagina(Integer pagina, Integer size) {
 		return finder.orderBy("id").setMaxRows(size).setFirstRow(pagina*size).findList();
+	}
+	
+	public static List<Usuario> findAll(int offset, int size){
+		return finder.setMaxRows(size).setFirstRow(offset).findList();
 	}
 
 	public boolean changeData(Usuario newData) {

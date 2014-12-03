@@ -33,14 +33,16 @@ public class Usuarios extends Controller {
 			paginaSize = "10";
 		}
 
-		List<Usuario> lista = Usuario.findPagina(pag, Integer.valueOf(paginaSize));
-		Integer count = Usuario.finder.findRowCount();
+		//List<Usuario> lista = Usuario.findPagina(pag, Integer.valueOf(paginaSize));
+		
 		
 		if (ControllerHelper.acceptsJson(request())) {
 			Map<String, Object> result = new HashMap<String, Object>();
 			
-			result.put("count", count);
-			result.put("pagina", lista);
+			List<Usuario> usuarios = Usuario.findAll(pag, Integer.valueOf(paginaSize));
+			Integer count = Usuario.finder.findRowCount();
+			result.put("Numero de usuarios", count);
+			result.put("usuarios", usuarios);
 			
 			res = ok(Json.toJson(result));
 		}
@@ -99,7 +101,7 @@ public class Usuarios extends Controller {
 		
 		// Esto implementa una característica de hypermedia: devolvemos la URL para consultar
 		// los detalles del usuario
-		//response().setHeader(LOCATION, routes.Usuarios.retrieve(usuario.getId()).absoluteURL(request()));
+		response().setHeader(LOCATION, routes.Usuarios.retrieve(usuario.getId()).absoluteURL(request()));
 
 		return created(Json.toJson(usuario));
 	}

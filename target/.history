@@ -49,3 +49,26 @@ stage
 clean
 compile
 run
+stage
+compile
+run
+h2-browser
+compile
+run
+compile clean
+compile 
+run
+h2-browser
+stage
+compile
+run
+h2-browser
+stage
+compile
+run
+stage
+compile
+run
+clean
+stage
+run

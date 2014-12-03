@@ -1,6 +1,6 @@
 // @SOURCE:C:/Users/Jose/workspace/favorites/conf/routes
-// @HASH:d42535612242424105208c8cc790f64deef71980
-// @DATE:Wed Dec 03 12:41:28 CET 2014
+// @HASH:8ee6140d7cd81e8c789893b620a3b0b57c4a4354
+// @DATE:Wed Dec 03 18:24:08 CET 2014
 
 package controllers;
 

@@ -45,7 +45,7 @@ public class Tags extends Controller {
 		
 		Tag tagName = form.get();
 		
-		tagName.setFavorito(favorito);
+		tagName.addFavorito(favorito);
 		tagName.save();
 		
 		return created();

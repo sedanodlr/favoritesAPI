@@ -22,7 +22,7 @@ public class Favorito extends Model {
 	public Long id;
 	
 	@Required
-	public String name;
+	public String nombre;
 	
 	@Required
 	public String url;
@@ -31,7 +31,7 @@ public class Favorito extends Model {
 	@JsonIgnore
 	public Usuario usuario;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="favorito")
+	@ManyToMany(cascade = CascadeType.ALL)
 	public List<Tag> tags = new ArrayList<Tag>();
 	
 	public static Finder<Long, Favorito> finder = new Finder<Long, Favorito>(Long.class,Favorito.class);
@@ -51,7 +51,7 @@ public class Favorito extends Model {
 	 */
 	public void addTag(Tag tag) {
 		tags.add(tag);
-		tag.setFavorito(this);
+		
 	}
 	
 	public List<Tag> getTags()	{
@@ -74,14 +74,14 @@ public class Favorito extends Model {
 	}
 	
 	/*
-	 *  Name Functions
+	 *  nombre Functions
 	 */
-	public String getName()	{
-		return name;
+	public String getNombre()	{
+		return nombre;
 	}
 	
-	public void setName(String name)	{
-		this.name = name;
+	public void setNombre(String nombre)	{
+		this.nombre = nombre;
 	}
 	
 	/*
@@ -102,21 +102,18 @@ public class Favorito extends Model {
 		return finder.setMaxRows(size).setFirstRow(offset).findList();
 	}
 	
-	public static List<Favorito> findById(Long id,int size, int offset)	{
-		return finder.where().eq("id",id).setMaxRows(size).setFirstRow(offset).findList();
+	public static List<Favorito> findByUserId(Long id,int size, int offset)	{
+		return finder.where().eq("usuario_id",id).setMaxRows(size).setFirstRow(offset).findList();
 	}
 	
-	public static List<Favorito> findByName(String name,int size, int offset)	{
-		return finder.where().eq("name",name).setMaxRows(size).setFirstRow(offset).findList();
+	public static List<Favorito> findByNombre(String nombre,int size, int offset)	{
+		return finder.where().eq("nombre",nombre).setMaxRows(size).setFirstRow(offset).findList();
 	}
 	
 	public static List<Favorito> findByUrl(String url,int size, int offset)	{
 		return finder.where().eq("url",url).setMaxRows(size).setFirstRow(offset).findList();
 	}
 	
-	public static List<Favorito> findByUser(Usuario usuario,int size, int offset)	{
-		return finder.where().eq("usuario", usuario).setMaxRows(size).setFirstRow(offset).findList();
-	}
 	/*
 	@Override
 	//Nos ayuda a saber si dos objetos son iguales 
