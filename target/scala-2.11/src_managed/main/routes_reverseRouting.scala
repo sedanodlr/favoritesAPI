@@ -1,6 +1,6 @@
 // @SOURCE:C:/Users/Jose/workspace/favorites/conf/routes
-// @HASH:8ee6140d7cd81e8c789893b620a3b0b57c4a4354
-// @DATE:Wed Dec 03 18:24:08 CET 2014
+// @HASH:7d3dc6056f1411e29cca743f0509826de2db65de
+// @DATE:Thu Dec 04 13:44:05 CET 2014
 
 import Routes.{prefix => _prefix, defaultPrefix => _defaultPrefix}
 import play.core._
@@ -15,13 +15,12 @@ import _root_.play.libs.F
 import Router.queryString
 
 
-// @LINE:37
-// @LINE:33
-// @LINE:31
-// @LINE:29
+// @LINE:39
+// @LINE:35
 // @LINE:25
 // @LINE:23
 // @LINE:19
+// @LINE:17
 // @LINE:15
 // @LINE:11
 // @LINE:9
@@ -30,11 +29,11 @@ import Router.queryString
 // @LINE:3
 package controllers {
 
-// @LINE:37
+// @LINE:39
 class ReverseAssets {
 
 
-// @LINE:37
+// @LINE:39
 def at(file:String): Call = {
    implicit val _rrc = new ReverseRouteContext(Map(("path", "/public")))
    Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[PathBindable[String]].unbind("file", file))
@@ -44,30 +43,14 @@ def at(file:String): Call = {
 }
                           
 
-// @LINE:33
-// @LINE:31
-// @LINE:29
+// @LINE:35
 class ReverseTelefonos {
 
 
-// @LINE:31
-def create(uId:Long): Call = {
-   import ReverseRouteContext.empty
-   Call("POST", _prefix + { _defaultPrefix } + "usuario/" + implicitly[PathBindable[Long]].unbind("uId", uId) + "/telefono")
-}
-                        
-
-// @LINE:33
+// @LINE:35
 def delete(uId:Long, tId:Long): Call = {
    import ReverseRouteContext.empty
    Call("DELETE", _prefix + { _defaultPrefix } + "usuario/" + implicitly[PathBindable[Long]].unbind("uId", uId) + "/telefono/" + implicitly[PathBindable[Long]].unbind("tId", tId))
-}
-                        
-
-// @LINE:29
-def index(uId:Long): Call = {
-   import ReverseRouteContext.empty
-   Call("GET", _prefix + { _defaultPrefix } + "usuario/" + implicitly[PathBindable[Long]].unbind("uId", uId) + "/telefonos")
 }
                         
 
@@ -75,14 +58,22 @@ def index(uId:Long): Call = {
                           
 
 // @LINE:19
+// @LINE:17
 // @LINE:15
 class ReverseFavoritos {
 
 
-// @LINE:19
+// @LINE:17
 def create(uId:Long): Call = {
    import ReverseRouteContext.empty
    Call("POST", _prefix + { _defaultPrefix } + "usuario/" + implicitly[PathBindable[Long]].unbind("uId", uId) + "/favorito")
+}
+                        
+
+// @LINE:19
+def delete(uId:Long, fId:Long): Call = {
+   import ReverseRouteContext.empty
+   Call("DELETE", _prefix + { _defaultPrefix } + "usuario/" + implicitly[PathBindable[Long]].unbind("uId", uId) + "/favorito/" + implicitly[PathBindable[Long]].unbind("fId", fId))
 }
                         
 
@@ -104,14 +95,14 @@ class ReverseTags {
 // @LINE:25
 def create(uId:Long): Call = {
    import ReverseRouteContext.empty
-   Call("POST", _prefix + { _defaultPrefix } + "usuario/" + implicitly[PathBindable[Long]].unbind("uId", uId) + "/tag")
+   Call("POST", _prefix + { _defaultPrefix } + "favorito/" + implicitly[PathBindable[Long]].unbind("uId", uId) + "/tag")
 }
                         
 
 // @LINE:23
-def index(uId:Long): Call = {
+def index(fId:Long): Call = {
    import ReverseRouteContext.empty
-   Call("GET", _prefix + { _defaultPrefix } + "usuario/" + implicitly[PathBindable[Long]].unbind("uId", uId) + "/tags")
+   Call("GET", _prefix + { _defaultPrefix } + "favorito/" + implicitly[PathBindable[Long]].unbind("fId", fId) + "/tags")
 }
                         
 
@@ -167,13 +158,12 @@ def update(uId:Long): Call = {
                   
 
 
-// @LINE:37
-// @LINE:33
-// @LINE:31
-// @LINE:29
+// @LINE:39
+// @LINE:35
 // @LINE:25
 // @LINE:23
 // @LINE:19
+// @LINE:17
 // @LINE:15
 // @LINE:11
 // @LINE:9
@@ -183,11 +173,11 @@ def update(uId:Long): Call = {
 package controllers.javascript {
 import ReverseRouteContext.empty
 
-// @LINE:37
+// @LINE:39
 class ReverseAssets {
 
 
-// @LINE:37
+// @LINE:39
 def at : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Assets.at",
    """
@@ -201,24 +191,11 @@ def at : JavascriptReverseRoute = JavascriptReverseRoute(
 }
               
 
-// @LINE:33
-// @LINE:31
-// @LINE:29
+// @LINE:35
 class ReverseTelefonos {
 
 
-// @LINE:31
-def create : JavascriptReverseRoute = JavascriptReverseRoute(
-   "controllers.Telefonos.create",
-   """
-      function(uId) {
-      return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "usuario/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("uId", uId) + "/telefono"})
-      }
-   """
-)
-                        
-
-// @LINE:33
+// @LINE:35
 def delete : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Telefonos.delete",
    """
@@ -229,31 +206,32 @@ def delete : JavascriptReverseRoute = JavascriptReverseRoute(
 )
                         
 
-// @LINE:29
-def index : JavascriptReverseRoute = JavascriptReverseRoute(
-   "controllers.Telefonos.index",
-   """
-      function(uId) {
-      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "usuario/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("uId", uId) + "/telefonos"})
-      }
-   """
-)
-                        
-
 }
               
 
 // @LINE:19
+// @LINE:17
 // @LINE:15
 class ReverseFavoritos {
 
 
-// @LINE:19
+// @LINE:17
 def create : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Favoritos.create",
    """
       function(uId) {
       return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "usuario/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("uId", uId) + "/favorito"})
+      }
+   """
+)
+                        
+
+// @LINE:19
+def delete : JavascriptReverseRoute = JavascriptReverseRoute(
+   "controllers.Favoritos.delete",
+   """
+      function(uId,fId) {
+      return _wA({method:"DELETE", url:"""" + _prefix + { _defaultPrefix } + """" + "usuario/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("uId", uId) + "/favorito/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("fId", fId)})
       }
    """
 )
@@ -283,7 +261,7 @@ def create : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Tags.create",
    """
       function(uId) {
-      return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "usuario/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("uId", uId) + "/tag"})
+      return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "favorito/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("uId", uId) + "/tag"})
       }
    """
 )
@@ -293,8 +271,8 @@ def create : JavascriptReverseRoute = JavascriptReverseRoute(
 def index : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Tags.index",
    """
-      function(uId) {
-      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "usuario/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("uId", uId) + "/tags"})
+      function(fId) {
+      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "favorito/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("fId", fId) + "/tags"})
       }
    """
 )
@@ -372,13 +350,12 @@ def update : JavascriptReverseRoute = JavascriptReverseRoute(
         
 
 
-// @LINE:37
-// @LINE:33
-// @LINE:31
-// @LINE:29
+// @LINE:39
+// @LINE:35
 // @LINE:25
 // @LINE:23
 // @LINE:19
+// @LINE:17
 // @LINE:15
 // @LINE:11
 // @LINE:9
@@ -388,11 +365,11 @@ def update : JavascriptReverseRoute = JavascriptReverseRoute(
 package controllers.ref {
 
 
-// @LINE:37
+// @LINE:39
 class ReverseAssets {
 
 
-// @LINE:37
+// @LINE:39
 def at(path:String, file:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.Assets.at(path, file), HandlerDef(this.getClass.getClassLoader, "", "controllers.Assets", "at", Seq(classOf[String], classOf[String]), "GET", """ Map static resources from the /public folder to the /assets URL path""", _prefix + """assets/$file<.+>""")
 )
@@ -401,28 +378,18 @@ def at(path:String, file:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.
 }
                           
 
-// @LINE:33
-// @LINE:31
-// @LINE:29
+// @LINE:35
 class ReverseTelefonos {
 
 
-// @LINE:31
-def create(uId:Long): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Telefonos.create(uId), HandlerDef(this.getClass.getClassLoader, "", "controllers.Telefonos", "create", Seq(classOf[Long]), "POST", """ Crear telefono de un usuario""", _prefix + """usuario/$uId<[0-9]*>/telefono""")
-)
-                      
-
-// @LINE:33
+// @LINE:35
 def delete(uId:Long, tId:Long): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Telefonos.delete(uId, tId), HandlerDef(this.getClass.getClassLoader, "", "controllers.Telefonos", "delete", Seq(classOf[Long], classOf[Long]), "DELETE", """ Borrar un telefono de un usuario""", _prefix + """usuario/$uId<[0-9]*>/telefono/$tId<[0-9]*>""")
-)
-                      
-
-// @LINE:29
-def index(uId:Long): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Telefonos.index(uId), HandlerDef(this.getClass.getClassLoader, "", "controllers.Telefonos", "index", Seq(classOf[Long]), "GET", """################################## TELEFONOS ###############################################
- Obtener los telefonos de un usuario""", _prefix + """usuario/$uId<[0-9]*>/telefonos""")
+   controllers.Telefonos.delete(uId, tId), HandlerDef(this.getClass.getClassLoader, "", "controllers.Telefonos", "delete", Seq(classOf[Long], classOf[Long]), "DELETE", """################################## TELEFONOS ###############################################
+ Obtener los telefonos de un usuario
+GET     /usuario/$uId<[0-9]*>/telefonos              controllers.Telefonos.index(uId: Long)
+ Crear telefono de un usuario
+POST    /usuario/$uId<[0-9]*>/telefono               controllers.Telefonos.create(uId: Long)
+ Borrar un telefono de un usuario""", _prefix + """usuario/$uId<[0-9]*>/telefono/$tId<[0-9]*>""")
 )
                       
 
@@ -430,15 +397,20 @@ def index(uId:Long): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
                           
 
 // @LINE:19
+// @LINE:17
 // @LINE:15
 class ReverseFavoritos {
 
 
-// @LINE:19
+// @LINE:17
 def create(uId:Long): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Favoritos.create(uId), HandlerDef(this.getClass.getClassLoader, "", "controllers.Favoritos", "create", Seq(classOf[Long]), "POST", """ Obtener los favoritos de un tag
-GET 	/favorito/$favoritoId<[0-9]*>/tags   controllers.Favoritos.tags(favoritoId: Long)
- Crear favorito de un usuario""", _prefix + """usuario/$uId<[0-9]*>/favorito""")
+   controllers.Favoritos.create(uId), HandlerDef(this.getClass.getClassLoader, "", "controllers.Favoritos", "create", Seq(classOf[Long]), "POST", """ Crear favorito de un usuario""", _prefix + """usuario/$uId<[0-9]*>/favorito""")
+)
+                      
+
+// @LINE:19
+def delete(uId:Long, fId:Long): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
+   controllers.Favoritos.delete(uId, fId), HandlerDef(this.getClass.getClassLoader, "", "controllers.Favoritos", "delete", Seq(classOf[Long], classOf[Long]), "DELETE", """ Borrar favorito de un usuario""", _prefix + """usuario/$uId<[0-9]*>/favorito/$fId<[0-9]*>""")
 )
                       
 
@@ -459,14 +431,14 @@ class ReverseTags {
 
 // @LINE:25
 def create(uId:Long): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Tags.create(uId), HandlerDef(this.getClass.getClassLoader, "", "controllers.Tags", "create", Seq(classOf[Long]), "POST", """ Crear un tag de un favorito""", _prefix + """usuario/$uId<[0-9]*>/tag""")
+   controllers.Tags.create(uId), HandlerDef(this.getClass.getClassLoader, "", "controllers.Tags", "create", Seq(classOf[Long]), "POST", """ Crear un tag a un favorito""", _prefix + """favorito/$uId<[0-9]*>/tag""")
 )
                       
 
 // @LINE:23
-def index(uId:Long): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Tags.index(uId), HandlerDef(this.getClass.getClassLoader, "", "controllers.Tags", "index", Seq(classOf[Long]), "GET", """#################################### TAGS ###################################################
- Obtener los tags de un favorito""", _prefix + """usuario/$uId<[0-9]*>/tags""")
+def index(fId:Long): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
+   controllers.Tags.index(fId), HandlerDef(this.getClass.getClassLoader, "", "controllers.Tags", "index", Seq(classOf[Long]), "GET", """#################################### TAGS ###################################################
+ Obtener los tags de un favorito""", _prefix + """favorito/$fId<[0-9]*>/tags""")
 )
                       
 

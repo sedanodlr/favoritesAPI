@@ -14,16 +14,16 @@ import play.mvc.Result;
 
 /**
  * 
- * @author jm
+ * @authors Luis Sedano de la Rosa
+ * 		    José Manuel Paredes Garcia
+ *
  */
 public class Usuarios extends Controller {
 	
 	/**
-	 * Action method para GET /usuarios/<pag>.
-	 * Opcionalmente se puede pasar el parámetro size para indicar el tamaño de página.
-	 * Si no se pasa tamaño de página, se usará 10
-	 * 
-	 * @param pag número de página a recuperar.
+	 * Action method GET /usuarios/<pag>.
+	 * This method return a JSON with all users
+	 * @param Page
 	 */
 	public static Result index(Integer pag) {
 		Result res;
@@ -32,9 +32,6 @@ public class Usuarios extends Controller {
 		if (paginaSize == null) {
 			paginaSize = "10";
 		}
-
-		//List<Usuario> lista = Usuario.findPagina(pag, Integer.valueOf(paginaSize));
-		
 		
 		if (ControllerHelper.acceptsJson(request())) {
 			Map<String, Object> result = new HashMap<String, Object>();
@@ -56,9 +53,32 @@ public class Usuarios extends Controller {
 		return res; 
 	}
 	
+	/**
+	 * Action method POST /usuario/<uId>.
+	 * This method adds a user and return a JSON with user's data created.
+	 * The user attributes must be inserted into the body
+	 */
+	public static Result create() {
+		Form<Usuario> form = Form.form(Usuario.class).bindFromRequest();
+
+		if (form.hasErrors()) {
+			return badRequest(ControllerHelper.errorJson(2, "invalid_user", form.errorsAsJson()));
+		}
+
+		Usuario usuario = form.get();
+		
+		usuario.save();
+		
+		// Esto implementa una característica de hypermedia: devolvemos la URL para consultar
+		// los detalles del usuario
+		response().setHeader(LOCATION, routes.Usuarios.retrieve(usuario.getId()).absoluteURL(request()));
+
+		return created(Json.toJson(usuario));
+	}
 	
 	/**
 	 * Action method para GET /usuario/<uId>
+	 * This method return a JSON with user's data
 	 * 
 	 * @param uId identificador del usuario
 	 */
@@ -83,34 +103,14 @@ public class Usuarios extends Controller {
 		
 		return res;
 	}
-	
-	/**
-	 * Action method para POST /usuario/<uId>.
-	 * Se deben pasar los atributos del usuario en el body de la petición. 
-	 */
-	public static Result create() {
-		Form<Usuario> form = Form.form(Usuario.class).bindFromRequest();
-
-		if (form.hasErrors()) {
-			return badRequest(ControllerHelper.errorJson(2, "invalid_user", form.errorsAsJson()));
-		}
-
-		Usuario usuario = form.get();
-		
-		usuario.save();
-		
-		// Esto implementa una característica de hypermedia: devolvemos la URL para consultar
-		// los detalles del usuario
-		response().setHeader(LOCATION, routes.Usuarios.retrieve(usuario.getId()).absoluteURL(request()));
-
-		return created(Json.toJson(usuario));
-	}
 
 	/**
-	 * Action method para PUT /usuario/<uId>
-	 * Se deben pasar los atributos a modificar en el body de la petición. 
+	 * Action method PUT /usuario/<uId>
+	 * This method updates the data of a user and return "ok result" message 
+	 * if the upgraded was correctly.
+	 * New user attributes must be inserted into the body.
 	 * 
-	 * @param uId identificador del usuario a modificar
+	 * @param Id User
 	 */
 	public static Result update(Long uId) {
 		Usuario usuario = Usuario.finder.byId(uId);
@@ -138,9 +138,11 @@ public class Usuarios extends Controller {
 	}
 	
 	/**
-	 * Action method para DELETE /usuario/<uId>
+	 * Action method DELETE /usuario/<uId>
+	 * This method delete a user and return "ok result" message if
+	 * the user was deleted correctly.
 	 * 
-	 * @param uId identificador del usuario a borrar
+	 * @param Id User
 	 */
 	public static Result delete(Long uId) {
 		Usuario usuario = Usuario.finder.byId(uId);

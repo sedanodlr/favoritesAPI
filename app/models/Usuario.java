@@ -33,16 +33,12 @@ public class Usuario extends Model {
 	public static Finder<Long, Usuario> finder = new Finder<Long, Usuario>(Long.class, Usuario.class);
 	
 	/*
-	 *  Usuario functions
+	 *  User Methods
 	 */
-	public static List<Usuario> findPagina(Integer pagina, Integer size) {
-		return finder.orderBy("id").setMaxRows(size).setFirstRow(pagina*size).findList();
-	}
-	
 	public static List<Usuario> findAll(int offset, int size){
 		return finder.setMaxRows(size).setFirstRow(offset).findList();
 	}
-
+	
 	public boolean changeData(Usuario newData) {
 		boolean changed = false;
 		
@@ -59,16 +55,25 @@ public class Usuario extends Model {
 		return changed;
 	}
 	
-	public void addTelefono(Telefono telefono) {
-		telefonos.add(telefono);
-		telefono.setUsuario(this);
-	}
-	
+	/*
+	 *  Favorite Methods
+	 */
 	public void addFavorito(Favorito favorito)	{
 		favoritos.add(favorito);
 		favorito.setUsuario(this);
 	}
 	
+	public List<Favorito> getFavoritos() {
+		return favoritos;
+	}
+	
+	public void setFavoritos(List<Favorito> favoritos) {
+		this.favoritos = favoritos;
+	}
+	
+	/*
+	 *  Id Methods
+	 */
 	public Long getId() {
 		return id;
 	}
@@ -76,7 +81,10 @@ public class Usuario extends Model {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
+	/*
+	 *  Name Methods 
+	 */
 	public String getNombre() {
 		return nombre;
 	}
@@ -84,7 +92,10 @@ public class Usuario extends Model {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
+    
+	/*
+	 *  Lastname Methods
+	 */
 	public String getApellidos() {
 		return apellidos;
 	}
@@ -92,20 +103,20 @@ public class Usuario extends Model {
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
-
-	public List<Telefono> getTelefonos() {
-		return telefonos;
-	}
-
-	public void setTelefonos(List<Telefono> telefonos) {
-		this.telefonos = telefonos;
-	}
-
-	public List<Favorito> getFavoritos() {
-		return favoritos;
-	}
-	
-	public void setFavoritos(List<Favorito> favoritos) {
-		this.favoritos = favoritos;
+	/*
+	 * To compare two users object
+	 */
+	@Override
+	public boolean equals(Object obj)	{
+		if(obj == this)	{
+			return true;
+		}
+		if(!(obj instanceof Usuario))	{
+			return false;
+		}
+		
+		Usuario usuario = (Usuario)obj;
+		
+		return (usuario.id == this.id);
 	}
 }

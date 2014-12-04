@@ -33,12 +33,16 @@ public class Tag extends Model {
 	/*
 	 *  Favorite functions
 	 */
+	public void addFavorito(Favorito favorito)	{
+		favoritos.add(favorito);
+	}
+	
 	public List<Favorito> getFavoritos()	{
 		return favoritos;
 	}
 	
-	public void addFavorito(Favorito favorito)	{
-		favoritos.add(favorito);
+	public Favorito getFavorito(Long favoritoId)	{
+		return finder.byId(id).getFavorito(favoritoId);
 	}
 	
 	/*
@@ -61,5 +65,21 @@ public class Tag extends Model {
 	
 	public void setTagName(String tagName)	{
 		this.tagName = tagName;
+	}
+	/*
+	 * To compare two tag object
+	 */
+	@Override
+	public boolean equals(Object obj)	{
+		if(obj == this)	{
+			return true;
+		}
+		if(!(obj instanceof Tag)){
+			return false;
+		}
+		
+		Tag tag = (Tag)obj;
+		
+		return (tag.id == this.id);
 	}
 }

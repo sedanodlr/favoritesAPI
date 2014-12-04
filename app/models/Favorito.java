@@ -37,66 +37,7 @@ public class Favorito extends Model {
 	public static Finder<Long, Favorito> finder = new Finder<Long, Favorito>(Long.class,Favorito.class);
 	
 	/*
-	 *  User Functions
-	 */
-	public Usuario getUsuario()	{
-		return usuario;
-	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-	
-	/*
-	 *  Tag Functions
-	 */
-	public void addTag(Tag tag) {
-		tags.add(tag);
-		
-	}
-	
-	public List<Tag> getTags()	{
-		return tags;
-	}
-	
-	public void setTags(List<Tag> tags)	{
-		this.tags = tags;
-	}
-	
-	/*
-	 *  Id Functions
-	 */
-	public Long getId()	{
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	/*
-	 *  nombre Functions
-	 */
-	public String getNombre()	{
-		return nombre;
-	}
-	
-	public void setNombre(String nombre)	{
-		this.nombre = nombre;
-	}
-	
-	/*
-	 * URL functions 
-	 */
-	public String getUrl()	{
-		return url;
-	}
-	
-	public void setUrl(String url)	{
-		this.url = url;
-	}
-    
-	/*
-	 *  Favorite functions
+	 *  Favorite Methods
 	 */
 	public static List<Favorito> findAll(int size,int offset)	{
 		return finder.setMaxRows(size).setFirstRow(offset).findList();
@@ -113,21 +54,80 @@ public class Favorito extends Model {
 	public static List<Favorito> findByUrl(String url,int size, int offset)	{
 		return finder.where().eq("url",url).setMaxRows(size).setFirstRow(offset).findList();
 	}
+	/*
+	 *  User Methods
+	 */
+	public Usuario getUsuario()	{
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	
 	/*
+	 *  Tag Methods
+	 */
+	public void addTag(Tag tag) {
+		tags.add(tag);
+		
+	}
+	
+	public List<Tag> getTags()	{
+		return tags;
+	}
+	
+	public void setTags(List<Tag> tags)	{
+		this.tags = tags;
+	}
+	
+	/*
+	 *  Id Methods
+	 */
+	public Long getId()	{
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	/*
+	 *  Name Methods
+	 */
+	public String getNombre()	{
+		return nombre;
+	}
+	
+	public void setNombre(String nombre)	{
+		this.nombre = nombre;
+	}
+	
+	/*
+	 * URL Methods 
+	 */
+	public String getUrl()	{
+		return url;
+	}
+	
+	public void setUrl(String url)	{
+		this.url = url;
+	}
+	
+	/*
+	 * To compare two favorite object
+	 */
 	@Override
-	//Nos ayuda a saber si dos objetos son iguales 
 	public boolean equals(Object obj)	{
 		if(obj == this)	{
 			return true;
 		}
-		if(!(obj instanceof Usuario))	{
+		if(!(obj instanceof Favorito))	{
 			return false;
 		}
 		
-		Usuario u = (Usuario)obj;
+		Favorito favorito = (Favorito)obj;
 		
-		return (u.id == this.id);
-	}*/
+		return (favorito.id == this.id);
+	}
 }
 

@@ -19,16 +19,16 @@ public class Telefonos extends Controller {
 	 * 
 	 * @param uId identificador del usuario
 	 */
-	public static Result index(Long uId) {
+	public static void index(Long uId) {
 		Result res;
 		
 		Usuario usuario = Usuario.finder.byId(uId);		
 		if (usuario == null) {
-			return notFound();
+			//return notFound();
 		}
 		
 		if (ControllerHelper.acceptsJson(request())) {
-			res = ok(Json.toJson(usuario.getTelefonos()));
+			//res = ok(Json.toJson(usuario.getTelefonos()));
 		}
 		/*else if (ControllerHelper.acceptsXml(request())) {
 			res = ok(views.xml.telefonos.render(usuario.getTelefonos()));
@@ -37,7 +37,7 @@ public class Telefonos extends Controller {
 			res = badRequest(ControllerHelper.errorJson(1, "unsupported_format", null));
 		}
 			
-		return res; 
+		//return res; 
 	}
 	
 	/**
