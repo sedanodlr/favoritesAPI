@@ -1,0 +1,25 @@
+<p>Este método permite actualizar los datos del usuario cuyo ID se proporciona
+### Request</p>
+
+<ul>
+  <li>
+    <p><strong><code>$uId&lt;[0-9]*&gt;</code></strong> es el ID del usuario a actualizar.</p>
+  </li>
+  <li>
+    <p>En el body se enviará un fichero JSON con los campos a actualizar. Los campos “nombre” y “apellidos” no pueden estar vacíos.</p>
+  </li>
+</ul>
+
+<p><code>Header:  Content-type: application/json</code>
+<code>{
+	'nombre': 'Jacobo',
+    	'apellidos': 'McAllister IV'
+}</code></p>
+
+<h3 id="response">Response</h3>
+
+<p>En caso de éxito devuelve: </p>
+
+<p><code>Status: 200 OK</code></p>
+
+<p>For errors responses, see the <a href="#response-status-codes">response status codes documentation</a>.</p>

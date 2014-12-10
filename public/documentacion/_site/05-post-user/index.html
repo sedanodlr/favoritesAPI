@@ -1,0 +1,26 @@
+<p>Este método se utiliza para crear un nuevo usuario</p>
+
+<h3 id="request">Request</h3>
+
+<ul>
+  <li>
+    <p>El header debe ser <strong>Content-type: application/json</strong>.</p>
+  </li>
+  <li>
+    <p><strong>El cuerpo no debe ir vacío</strong> debería incluir al menos el nombre y apellido del usuario</p>
+  </li>
+</ul>
+
+<p><code>Content-type: application/json</code>
+<code>{
+    nombre: 'Juan'
+    apellidos: 'Perez'
+}</code></p>
+
+<h3 id="response">Response</h3>
+
+<p><strong>En caso de éxito</strong>, devuelve:</p>
+
+<p><code>Status: 201 Created</code></p>
+
+<p>For errors responses, see the <a href="#response-status-codes">response status codes documentation</a>.</p>

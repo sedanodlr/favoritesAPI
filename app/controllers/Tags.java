@@ -25,19 +25,19 @@ public class Tags extends Controller {
 	 * 
 	 * @param Id favorite
 	 */
-	public static Result index(Long favoritoId)	{
+	public static Result getTags(Long favoritoId)	{
 		
 		Favorito favorito = Favorito.finder.byId(favoritoId);
 		
 		if(favorito == null)	{
-			return notFound();
+			return notFound(ControllerHelper.errorJson(10, "error_tag_no_encontrado", null));
 		}
 		
 		if(ControllerHelper.acceptsJson(request()))	{
 			return ok(Json.toJson(favorito.getTags()));
 		}
 		else	{
-			return badRequest(ControllerHelper.errorJson(1, "unsupported_format", null));
+			return badRequest(ControllerHelper.errorJson(1, "error_formato", null));
 		}
 	}
 	
@@ -50,16 +50,14 @@ public class Tags extends Controller {
 	 */
 	public static Result create(Long favoritoId)	{
 		Form<Tag> form = Form.form(Tag.class).bindFromRequest();
-		//String offset = request().getQueryString("offset");
-		//String size = request().getQueryString("size");
 		
 		if(form.hasErrors())	{
-			return badRequest(ControllerHelper.errorJson(2, "invalid_tag", form.errorsAsJson()));
+			return badRequest(ControllerHelper.errorJson(11,"error_tag_no_valido", form.errorsAsJson()));
 		}
 		
 		Favorito favorito = Favorito.finder.byId(favoritoId);
 		if(favorito == null)	{
-			return notFound();
+			return notFound(ControllerHelper.errorJson(10, "error_tag_no_encontrado", null));
 		}
 		
 		Tag tagName = form.get();
@@ -70,22 +68,19 @@ public class Tags extends Controller {
 		return created();
 	}
 	
-	/*public static Result delete(Long userId, Long favoritoId, Long tagId)	{
+   public static Result delete(Long userId, Long favoritoId, Long tagId)	{
 		Tag tag = Tag.finder.byId(tagId);
 		if(tag == null){
-			return notFound("Tag no encontrado");
-		}
-		Favorito favorito = Favorito.finder.byId(favoritoId);
-		if(favorito == null){
-			return notFound("Favorito no encontrado");
+			return notFound(ControllerHelper.errorJson(10,"error_tag_no_encontrado",null));
 		}
 		
-		if(!tag.getFavorito(favoritoId))	{
-			return badRequest(ControllerHelper.errorJson(2,"invalid_favorite",null));
+		Favorito favorito = Favorito.finder.byId(favoritoId);
+		if(favorito == null){
+			return notFound(ControllerHelper.errorJson(8,"error_favorito_no_encontrado",null));
 		}
 		
 		tag.delete();
 	
 		return ok();
-	}*/
+	}
 }

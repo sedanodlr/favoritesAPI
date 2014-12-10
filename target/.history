@@ -98,3 +98,15 @@ run
 stage
 run
 dist
+compile
+stage
+run
+stage
+compile
+run
+stage
+compile
+run
+stage
+compile
+run

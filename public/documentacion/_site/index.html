@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<head>
+  <title>Carte</title>
+  <meta charset='utf-8'/>
+  <meta name='description' content='Documentation website'/>
+  <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'/>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+  <link href='assets.css' rel='stylesheet' type='text/css'>
+</head>
+<body>  
+  <nav id='sidebar'>
+	<h1>Carte</h1>
+<ul id='links'>
+  
+    
+    <li><a href='#/response-status-codes'>Response status codes</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+  <li><h2>usuarios</h2>
+    <ul>
+    
+              
+        <li class=''><a href='#'></a></li>
+      
+    
+              
+        <li class='POST'><a href='#/05-post-user'>Crear usuario</a></li>
+              
+        <li class='GET'><a href='#/04-get-user'>Obtener usuario</a></li>
+              
+        <li class='GET'><a href='#/03-get-users'>Obtener lista de usuarios</a></li>
+              
+        <li class='PUT'><a href='#/02-put-user'>Actualizar usuario</a></li>
+              
+        <li class='DELETE'><a href='#/01-delete-user'>Eliminar usuario</a></li>
+      
+    
+    </ul>
+  </li>
+
+  <li><h2>favoritos</h2>
+    <ul>
+    
+              
+        <li class=''><a href='#'></a></li>
+      
+    
+              
+        <li class='POST'><a href='#/12-post-favorite-to-user'>Añadir favorito a usuario</a></li>
+              
+        <li class='GET'><a href='#/11-get-user-favorites'>Obtener favoritos de un usuario</a></li>
+              
+        <li class='DELETE'><a href='#/10-delete-favorito'>Eliminar favorito de usuario</a></li>
+      
+    
+    </ul>
+  </li>
+
+  <li><h2>tags</h2>
+    <ul>
+    
+              
+        <li class=''><a href='#'></a></li>
+      
+    
+              
+        <li class='POST'><a href='#/22-post-tag'>Añadir tag a favorito</a></li>
+              
+        <li class='GET'><a href='#/21-get-favorite-tags'>Obtener tags de un favorito</a></li>
+              
+        <li class='DELETE'><a href='#/20-delete-tag'>Eliminar tag de favorito de usuario</a></li>
+      
+    
+    </ul>
+  </li>
+
+</ul>
+</nav>
+
+<section id='content'>
+
+  <article class=''>
+    <a name='/response-status-codes' href='#/response-status-codes'><h2>Response status codes</h2></a>
+    <section class='body'>
+      <h3 id="success">Success</h3>
+
+<p>Successes differ from errors in that their body may not be a simple response object with a code and a message. The headers however are consistent across all calls:</p>
+
+<ul>
+  <li><code>GET</code>, <code>PUT</code>, <code>DELETE</code> returns <code>200 OK</code> on success,</li>
+  <li><code>POST </code> returns 201 on success,</li>
+</ul>
+
+<p>When <a href="#get-stuff">retrieving stuff</a> for example:</p>
+
+<p><code>Status: 200 OK</code>
+<code>{
+    {
+        id: thing_1,
+        name: 'My first thing'
+    },
+    {
+        id: thing_2,
+        name: 'My second thing'
+    }
+}</code></p>
+
+<h3 id="error">Error</h3>
+
+<p>Error responses are simply returning <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">standard HTTP error codes</a> along with some additional information:</p>
+
+<ul>
+  <li>The error code is sent back as a status header,</li>
+  <li>The body includes an object describing both the code and message (for debugging and/or display purposes),</li>
+</ul>
+
+<p>For a call with an invalid authentication token for example:</p>
+
+<p><code>Status: 401 Access denied</code>
+<code>{
+    code: 401,
+    message: 'Access denied: invalid authentication token.'
+}</code></p>
+
+    </section>
+  </article>
+
+  <article class='POST'>
+    <a name='/22-post-tag' href='#/22-post-tag'><h2><code><b>POST</b> /favorito/$uId<[0-9]*>/tag</code> Añadir tag a favorito</h2></a>
+    <section class='body'>
+      <p>Este método permite añadir un tag a un favorito seleccionado</p>
+
+<h3 id="request">Request</h3>
+
+<ul>
+  <li>Header: Content-type: application/json.</li>
+  <li><strong>El cuerpo no debe ir vacío</strong> y se debe especificar el nombre del tag a añadir.</li>
+</ul>
+
+<p><code>{
+    'tagName': 'new Tag'
+}</code></p>
+
+<h3 id="response">Response</h3>
+
+<p><strong>En caso de éxito</strong>, devuelve:</p>
+
+<p><code>Status: 201 Created</code></p>
+
+<p>For errors responses, see the <a href="#response-status-codes">response status codes documentation</a>.</p>
+
+    </section>
+  </article>
+
+  <article class='GET'>
+    <a name='/21-get-favorite-tags' href='#/21-get-favorite-tags'><h2><code><b>GET</b> /favorito/$favoritoId<[0-9]*>/tags</code> Obtener tags de un favorito</h2></a>
+    <section class='body'>
+      <p>Método que devuelve los tags de un favorito</p>
+
+<h3 id="response">Response</h3>
+
+<p>La lista de tags de un favorito</p>
+
+<p><code>Status: 200 OK</code>
+<code>{
+    {
+        'id': 1,
+        'tagName':'e-Sports'
+    },
+    {
+        'id': 2,
+        'tagName':'Noticias'
+    }
+}</code></p>
+
+<p>Para ver información sobre los códigos de error, visite <a href="#response-status-codes">documentación sobre los códigos de error</a>.</p>
+
+    </section>
+  </article>
+
+  <article class='DELETE'>
+    <a name='/20-delete-tag' href='#/20-delete-tag'><h2><code><b>DELETE</b> /usuario/$uId<[0-9]*>/favorito/$fId<[0-9]*>/tag/$tId<[0-9]*></code> Eliminar tag de favorito de usuario</h2></a>
+    <section class='body'>
+      <p>Este método elimina el tag ID se ha proporcionado</p>
+
+<h3 id="request">Request</h3>
+
+<ul>
+  <li>
+    <p><strong><code>$fId&lt;[0-9]*</code></strong> es el ID del tag a eliminar.</p>
+  </li>
+  <li>
+    <p><strong><code>$fId&lt;[0-9]*</code></strong> es el ID del favorito.</p>
+  </li>
+  <li>
+    <p><strong><code>$uId&lt;[0-9]*</code></strong> es el ID del usuario al que pertenece.</p>
+  </li>
+  <li>
+    <p><strong>El cuerpo se ignora</strong>.</p>
+  </li>
+</ul>
+
+<h3 id="response">Response</h3>
+
+<p><strong>En caso de éxito</strong>, devuelve:</p>
+
+<p><code>Status: 200 Deleted</code></p>
+
+<p>For errors responses, see the <a href="#response-status-codes">response status codes documentation</a>.</p>
+
+    </section>
+  </article>
+
+  <article class='POST'>
+    <a name='/12-post-favorite-to-user' href='#/12-post-favorite-to-user'><h2><code><b>POST</b> /usuario/$uId<[0-9]*>/favorito</code> Añadir favorito a usuario</h2></a>
+    <section class='body'>
+      <p>Este método se utiliza para añadir un favorito a un usuario existente</p>
+
+<h3 id="request">Request</h3>
+
+<ul>
+  <li>
+    <p>El header debe ser <strong>Content-type: application/json</strong>.</p>
+  </li>
+  <li>
+    <p><strong>El cuerpo no debe ir vacío</strong> </p>
+  </li>
+</ul>
+
+<p><code>Content-type: application/json</code>
+<code>{
+    'nombre': 'League of Legends',
+    'url': 'euw.leagueoflegends.com',
+    'tags':[
+    {'tagName':'e-Sports'}
+    ]
+}</code></p>
+
+<h3 id="response">Response</h3>
+
+<p><strong>En caso de éxito</strong>, devuelve:</p>
+
+<p><code>Status: 201 Created</code></p>
+
+<p>For errors responses, see the <a href="#response-status-codes">response status codes documentation</a>.</p>
+
+    </section>
+  </article>
+
+  <article class='GET'>
+    <a name='/11-get-user-favorites' href='#/11-get-user-favorites'><h2><code><b>GET</b> /user/$uId<[0-9]*>/telefonos</code> Obtener favoritos de un usuario</h2></a>
+    <section class='body'>
+      <p>Método que devuelve los favoritos del usuario solicitado</p>
+
+<h3 id="response">Response</h3>
+
+<p>Los favoritos del usuario solicitado</p>
+
+<p><code>Status: 200 OK</code></p>
+
+<p><code>[
+  {
+    'id': 33,
+    'nombre': 'El Mundo',
+    'url': 'www.elmundo.es',
+    'tags': [
+      {
+        'id': 33,
+        'tagName': 'noticias'
+      },
+      {
+        'id': 34,
+        'tagName': 'españa'
+      }
+    ]
+  },
+  {
+    'id': 34,
+    'nombre': 'realmadrid',
+    'url': 'www.realmadrid.es',
+    'tags': []
+  },
+  {
+    'id': 35,
+    'nombre': 'barça',
+    'url': 'www.fcbarcelona.es',
+    'tags': []
+  }
+]</code></p>
+
+<p>Para ver información sobre los códigos de error, visite <a href="#response-status-codes">documentación sobre los códigos de error</a>.</p>
+
+    </section>
+  </article>
+
+  <article class='DELETE'>
+    <a name='/10-delete-favorito' href='#/10-delete-favorito'><h2><code><b>DELETE</b> /usuario/$uId<[0-9]*>/favorito/$fId<[0-9]*></code> Eliminar favorito de usuario</h2></a>
+    <section class='body'>
+      <p>Este método elimina el favorito cuyo ID se ha proporcionado</p>
+
+<h3 id="request">Request</h3>
+
+<ul>
+  <li>
+    <p><strong><code>$fId&lt;[0-9]*</code></strong> es el ID del favorito a eliminar.</p>
+  </li>
+  <li>
+    <p><strong><code>$uId&lt;[0-9]*</code></strong> es el ID del usuario al que pertenece.</p>
+  </li>
+  <li>
+    <p><strong>El cuerpo se ignora</strong>.</p>
+  </li>
+</ul>
+
+<h3 id="response">Response</h3>
+
+<p><strong>En caso de éxito</strong>, devuelve:</p>
+
+<p><code>Status: 200 Deleted</code></p>
+
+<p>For errors responses, see the <a href="#response-status-codes">response status codes documentation</a>.</p>
+
+    </section>
+  </article>
+
+  <article class='POST'>
+    <a name='/05-post-user' href='#/05-post-user'><h2><code><b>POST</b> /usuario</code> Crear usuario</h2></a>
+    <section class='body'>
+      <p>Este método se utiliza para crear un nuevo usuario</p>
+
+<h3 id="request">Request</h3>
+
+<ul>
+  <li>
+    <p>El header debe ser <strong>Content-type: application/json</strong>.</p>
+  </li>
+  <li>
+    <p><strong>El cuerpo no debe ir vacío</strong> debería incluir al menos el nombre y apellido del usuario</p>
+  </li>
+</ul>
+
+<p><code>Content-type: application/json</code>
+<code>{
+    nombre: 'Juan'
+    apellidos: 'Perez'
+}</code></p>
+
+<h3 id="response">Response</h3>
+
+<p><strong>En caso de éxito</strong>, devuelve:</p>
+
+<p><code>Status: 201 Created</code></p>
+
+<p>For errors responses, see the <a href="#response-status-codes">response status codes documentation</a>.</p>
+
+    </section>
+  </article>
+
+  <article class='GET'>
+    <a name='/04-get-user' href='#/04-get-user'><h2><code><b>GET</b> /usuario/$uId<[0-9]*></code> Obtener usuario</h2></a>
+    <section class='body'>
+      <p>Método que devuelve el usuario solicitado</p>
+
+<h3 id="response">Response</h3>
+
+<p>El usuario solicitado</p>
+
+<p><code>Status: 200 OK</code>
+<code>{
+  "id": 1,
+  "nombre": "nombre",
+  "apellidos": "apellidos",
+  "favoritos": [
+    {
+      "id": 1,
+      "nombre": "20minutos",
+      "url": "www.20minutos.es",
+      "tags": [
+        {
+          "id": 1,
+          "tagName": "noticias"
+        },
+        {
+          "id": 2,
+          "tagName": "españa"
+        }
+      ],
+      "name": "20minutos"
+    }
+  ]
+}
+}</code></p>
+
+<p>Para ver información sobre los códigos de error, visite <a href="#response-status-codes">documentación sobre los códigos de error</a>.</p>
+
+    </section>
+  </article>
+
+  <article class='GET'>
+    <a name='/03-get-users' href='#/03-get-users'><h2><code><b>GET</b> /users/$pag<[0-9]*></code> Obtener lista de usuarios</h2></a>
+    <section class='body'>
+      <p>Método que devuelve la página pedida de la lista de usuarios</p>
+
+<h3 id="response">Response</h3>
+
+<p>La página pedida de la lista de usuarios</p>
+
+<p><code>Status: 200 OK</code></p>
+
+<p><code>{
+  "Numero de usuarios": 2,
+  "usuarios": [
+    {
+      "id": 1,
+      "nombre": "nombre",
+      "apellidos": "apellidos",
+      "favoritos": [
+        {
+          "id": 1,
+          "nombre": "20minutos",
+          "url": "www.20minutos.es",
+          "tags": [
+            {
+              "id": 1,
+              "tagName": "noticias"
+            },
+            {
+              "id": 2,
+              "tagName": "españa"
+            }
+          ],
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Harry",
+      "apellidos": "McMoridigan",
+      "favoritos": [
+        {
+          "id": 2,
+          "nombre": "elmundo",
+          "url": "www.elmundo.es",
+          "tags": [
+            {
+              "id": 3,
+              "tagName": "noticias"
+            },
+            {
+              "id": 4,
+              "tagName": "españa"
+            }
+          ],
+        }
+      ]
+    }
+  ]
+}</code></p>
+
+<p>Para ver información sobre los códigos de error, visite <a href="#response-status-codes">documentación sobre los códigos de error</a>.</p>
+
+    </section>
+  </article>
+
+  <article class='PUT'>
+    <a name='/02-put-user' href='#/02-put-user'><h2><code><b>PUT</b> /usuario/$uId<[0-9]*></code> Actualizar usuario</h2></a>
+    <section class='body'>
+      <p>Este método permite actualizar los datos del usuario cuyo ID se proporciona
+### Request</p>
+
+<ul>
+  <li>
+    <p><strong><code>$uId&lt;[0-9]*&gt;</code></strong> es el ID del usuario a actualizar.</p>
+  </li>
+  <li>
+    <p>En el body se enviará un fichero JSON con los campos a actualizar. Los campos “nombre” y “apellidos” no pueden estar vacíos.</p>
+  </li>
+</ul>
+
+<p><code>Header:  Content-type: application/json</code>
+<code>{
+	'nombre': 'Jacobo',
+    	'apellidos': 'McAllister IV'
+}</code></p>
+
+<h3 id="response">Response</h3>
+
+<p>En caso de éxito devuelve: </p>
+
+<p><code>Status: 200 OK</code></p>
+
+<p>For errors responses, see the <a href="#response-status-codes">response status codes documentation</a>.</p>
+
+    </section>
+  </article>
+
+  <article class='DELETE'>
+    <a name='/01-delete-user' href='#/01-delete-user'><h2><code><b>DELETE</b> /usuario/$uId<[0-9]*></code> Eliminar usuario</h2></a>
+    <section class='body'>
+      <p>Este método elimina el usuario cuyo ID se ha proporcionado</p>
+
+<h3 id="request">Request</h3>
+
+<ul>
+  <li>
+    <p><strong><code>$uId&lt;[0-9]*</code></strong> es el ID del usuario a eliminar.</p>
+  </li>
+  <li>
+    <p><strong>El cuerpo se ignora</strong>.</p>
+  </li>
+</ul>
+
+<h3 id="response">Response</h3>
+
+<p><strong>En caso de éxito</strong>, devuelve:</p>
+
+<p><code>Status: 200 Deleted</code></p>
+
+<p>For errors responses, see the <a href="#response-status-codes">response status codes documentation</a>.</p>
+
+    </section>
+  </article>
+
+</section>
+
+  
+  <!--[if lt IE 9]><script src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script><![endif]-->
+  <script src='assets.js' type='text/javascript'></script>
+  <script>require('boot');</script>
+</body>
+</html>

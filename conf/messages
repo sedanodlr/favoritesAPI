@@ -1,3 +1,11 @@
-unsupported_format=Unsupported format
-invalid_user=Invalid user
-invalid_phone=Invalid phone
+error_formato = Error en el formato
+error_usuario_no_valido = El usuario no es valido
+error_usuario_no_encontrado = El usuario no ha sido encontrado
+error_nombre_usuario = El tamaño del nombre y del apellido debe ser mayor de 3
+error_nombre_favorito = El tamaño del nombre del favorito y su url debe ser mayor de 3
+error_email_existente = El email introducido ya existe
+error_password_incorrecto = El password es incorrecto
+error_favorito_no_encontrado = El favorito no ha sido encontrado
+error_favorito_no_valido = El favorito no es valido
+error_tag_no_encontrado = El tag no ha sido encontrado	
+error_tag_no_valido	= El tag no es valido

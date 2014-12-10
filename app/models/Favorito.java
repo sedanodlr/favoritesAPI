@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
+import play.i18n.Messages;
 
 @Entity
 public class Favorito extends Model {
@@ -53,6 +54,13 @@ public class Favorito extends Model {
 	
 	public static List<Favorito> findByUrl(String url,int size, int offset)	{
 		return finder.where().eq("url",url).setMaxRows(size).setFirstRow(offset).findList();
+	}
+	
+	public String validateFavorito()	{
+		if(this.nombre.length() < 3 || this.url.length() < 3)	{
+			return Messages.get("error_nombre_favorito");
+		}
+		return null;
 	}
 	/*
 	 *  User Methods

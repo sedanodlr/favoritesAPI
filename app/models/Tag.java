@@ -31,7 +31,7 @@ public class Tag extends Model {
 	public static Finder<Long, Tag> finder = new Finder<Long, Tag>(Long.class, Tag.class);
 	
 	/*
-	 *  Favorite functions
+	 *  Favorite Methods
 	 */
 	public void addFavorito(Favorito favorito)	{
 		favoritos.add(favorito);
@@ -44,9 +44,9 @@ public class Tag extends Model {
 	public Favorito getFavorito(Long favoritoId)	{
 		return finder.byId(id).getFavorito(favoritoId);
 	}
-	
+
 	/*
-	 *  Id functions
+	 *  Id Methods
 	 */
 	public Long getId()	{
 		return id;
@@ -57,7 +57,7 @@ public class Tag extends Model {
 	}
 	
 	/*
-	 *  TagName functions
+	 *  TagName Methods
 	 */
 	public String getTagName()	{
 		return tagName;

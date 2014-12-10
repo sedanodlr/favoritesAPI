@@ -1,0 +1,59 @@
+<p>Método que devuelve la página pedida de la lista de usuarios</p>
+
+<h3 id="response">Response</h3>
+
+<p>La página pedida de la lista de usuarios</p>
+
+<p><code>Status: 200 OK</code></p>
+
+<p><code>{
+  "Numero de usuarios": 2,
+  "usuarios": [
+    {
+      "id": 1,
+      "nombre": "nombre",
+      "apellidos": "apellidos",
+      "favoritos": [
+        {
+          "id": 1,
+          "nombre": "20minutos",
+          "url": "www.20minutos.es",
+          "tags": [
+            {
+              "id": 1,
+              "tagName": "noticias"
+            },
+            {
+              "id": 2,
+              "tagName": "españa"
+            }
+          ],
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Harry",
+      "apellidos": "McMoridigan",
+      "favoritos": [
+        {
+          "id": 2,
+          "nombre": "elmundo",
+          "url": "www.elmundo.es",
+          "tags": [
+            {
+              "id": 3,
+              "tagName": "noticias"
+            },
+            {
+              "id": 4,
+              "tagName": "españa"
+            }
+          ],
+        }
+      ]
+    }
+  ]
+}</code></p>
+
+<p>Para ver información sobre los códigos de error, visite <a href="#response-status-codes">documentación sobre los códigos de error</a>.</p>

@@ -25,7 +25,7 @@ public class Usuarios extends Controller {
 	 * This method return a JSON with all users
 	 * @param Page
 	 */
-	public static Result index(Integer pag) {
+	public static Result getUsers(Integer pag) {
 		Result res;
 		
 		String paginaSize = request().getQueryString("size");
@@ -43,11 +43,8 @@ public class Usuarios extends Controller {
 			
 			res = ok(Json.toJson(result));
 		}
-		/*else if (ControllerHelper.acceptsXml(request())) {
-			res = ok(views.xml.usuarios.render(lista, count));
-		}*/
 		else {
-			res = badRequest(ControllerHelper.errorJson(1, "unsupported_format", null));
+			res = badRequest(ControllerHelper.errorJson(1, "error_formato", null));
 		}
 			
 		return res; 
@@ -62,11 +59,14 @@ public class Usuarios extends Controller {
 		Form<Usuario> form = Form.form(Usuario.class).bindFromRequest();
 
 		if (form.hasErrors()) {
-			return badRequest(ControllerHelper.errorJson(2, "invalid_user", form.errorsAsJson()));
+			return badRequest(ControllerHelper.errorJson(2, "error_usuario_no_valido", form.errorsAsJson()));
 		}
-
-		Usuario usuario = form.get();
 		
+		Usuario usuario = form.get();
+        if(usuario.validateUser() != null)	{
+          	return badRequest(usuario.validateUser());
+        }
+         		
 		usuario.save();
 		
 		// Esto implementa una característica de hypermedia: devolvemos la URL para consultar
@@ -87,22 +87,45 @@ public class Usuarios extends Controller {
 		
 		Usuario usuario = Usuario.finder.byId(uId);
 		if (usuario == null) {
-			res = notFound();
+			res = notFound(ControllerHelper.errorJson(3,"error_usuario_no_encontrado",null));
 		}
 		else {
 			if (ControllerHelper.acceptsJson(request())) {
 				res = ok(Json.toJson(usuario));
 			}
-			/*else if (ControllerHelper.acceptsXml(request())) {
-				res = ok(views.xml._usuario.render(usuario));
-			}*/
 			else {
-				res = badRequest(ControllerHelper.errorJson(1, "unsupported_format", null));
+				res = badRequest(ControllerHelper.errorJson(1, "error_formato", null));
 			}
 		}
 		
 		return res;
 	}
+	
+	/**
+	 * Action method para GET /usuario/<email>
+	 * This method return a JSON with user's data
+	 * 
+	 * @param email del usuario
+	 */
+	public static Result getUserByEmail(String email)	{
+		Result res;
+		
+		Usuario usuario = Usuario.findByEmail(email);
+		if(usuario == null)	{
+			res = notFound(ControllerHelper.errorJson(3,"error_usuario_no_encontrado",null));
+		}
+		else	{
+			if(ControllerHelper.acceptsJson(request())){
+				res = ok(Json.toJson(usuario));
+			}
+			else	{
+				res = badRequest(ControllerHelper.errorJson(1, "Error_formato", null));
+			}
+		}
+		
+		return res;
+	}
+	
 
 	/**
 	 * Action method PUT /usuario/<uId>
@@ -115,13 +138,13 @@ public class Usuarios extends Controller {
 	public static Result update(Long uId) {
 		Usuario usuario = Usuario.finder.byId(uId);
 		if (usuario == null) {
-			return notFound();
+			return notFound(ControllerHelper.errorJson(3,"error_usuario_no_encontrado",null));
 		}
 		
 		Form<Usuario> form = Form.form(Usuario.class).bindFromRequest();
 
 		if (form.hasErrors()) {
-			return badRequest(ControllerHelper.errorJson(1, "invalid_user", form.errorsAsJson()));
+			return badRequest(ControllerHelper.errorJson(2, "error_usuario_no_valido", form.errorsAsJson()));
 		}
 
 		Result res;
@@ -147,11 +170,11 @@ public class Usuarios extends Controller {
 	public static Result delete(Long uId) {
 		Usuario usuario = Usuario.finder.byId(uId);
 		if (usuario == null) {
-			return notFound();
+			return notFound(ControllerHelper.errorJson(3,"error_usuario_no_encontrado",null));
 		}
 
 		usuario.delete();
 
-		return ok();
+		return ok("Usuario borrado correctamente");
 	}
 }
