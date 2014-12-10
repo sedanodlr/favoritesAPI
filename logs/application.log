@@ -1,15 +1,9 @@
-2014-12-10 19:11:57,750 - [INFO] - from play in pool-7-thread-4 
+2014-12-10 21:34:56,587 - [INFO] - from play in pool-5-thread-1 
 Listening for HTTP on /0:0:0:0:0:0:0:0:9000
 
-2014-12-10 19:12:12,620 - [INFO] - from play in play-internal-execution-context-1 
+2014-12-10 21:35:03,537 - [INFO] - from play in play-internal-execution-context-1 
 database [default] connected at jdbc:h2:favoritos
 
-2014-12-10 19:12:13,540 - [INFO] - from play in play-internal-execution-context-1 
-Application started (Dev)
-
-2014-12-10 19:18:40,287 - [INFO] - from play in play-internal-execution-context-1 
-database [default] connected at jdbc:h2:favoritos
-
-2014-12-10 19:18:40,374 - [INFO] - from play in play-internal-execution-context-1 
+2014-12-10 21:35:04,101 - [INFO] - from play in play-internal-execution-context-1 
 Application started (Dev)
 

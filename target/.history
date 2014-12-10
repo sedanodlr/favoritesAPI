@@ -110,3 +110,9 @@ run
 stage
 compile
 run
+dist
+stage
+run
+activator
+stage
+dist
